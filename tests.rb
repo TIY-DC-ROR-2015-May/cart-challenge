@@ -38,21 +38,20 @@ class CartTest < MiniTest::Test
     assert_equal cart.cost_after_tax, 66
   end
 
-  # def test_carts_know_their_tax_rates
-  #   cart = Cart.new
-  #   assert_equal cart.tax_rate, 10
+  def test_carts_know_their_tax_rates
+    cart = Cart.new
+    assert_equal cart.tax_rate, 10
+    special_cart = Cart.new({tax_rate: 20})
+    assert_equal special_cart.tax_rate, 20
+  end
 
-  #   special_cart = Cart.new({tax_rate: 20})
-  #   assert_equal special_cart.tax_rate, 20
-  # end
+  def test_special_carts_know_their_after_tax_rates
+    special_cart = Cart.new({tax_rate: 20})
 
-  # def test_special_carts_know_their_after_tax_rates
-  #   special_cart = Cart.new({tax_rate: 20})
-
-  #   bread = Item.new("bread", 20)
-  #   special_cart.add_item(bread)
-  #   assert_equal special_cart.cost_before_tax, 20
-  #   assert_equal special_cart.cost_after_tax, 24
-  # end
+    bread = Item.new("bread", 20)
+    special_cart.add_item(bread)
+    assert_equal special_cart.cost_before_tax, 20
+    assert_equal special_cart.cost_after_tax, 24
+  end
 
 end

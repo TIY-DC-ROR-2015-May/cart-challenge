@@ -11,10 +11,13 @@ end
 
 class Cart
 
-  attr_reader :item, :contents
-
-  def initialize
+  def initialize tax=nil
     @contents = []
+    if !tax.nil?
+      @tax_rate = tax[:tax_rate]
+    else
+      @tax_rate = tax
+    end
   end
 
   def add_item item
@@ -29,16 +32,18 @@ class Cart
     @contents.include?(item)
   end
 
+  def tax_rate
+    @tax_rate || 10
+  end
+
   def cost_before_tax
     cbt = @contents.map { |c| c.price }
-    cbt.inject(:+)
+    cbt.inject(:+).to_f
   end
 
   def cost_after_tax
-    cost_before_tax * 1.1
-  end
-
-  def tax_rate
+    tax = cost_before_tax * (tax_rate / 100.0)
+    cost_before_tax + tax
   end
 
 end
