@@ -1,5 +1,6 @@
 require 'minitest/autorun'
 require 'pry'
+require './item'
 
 class CartTest < MiniTest::Test
 
@@ -40,7 +41,6 @@ class CartTest < MiniTest::Test
   def test_carts_know_their_tax_rates
     cart = Cart.new
     assert_equal cart.tax_rate, 10
-
     special_cart = Cart.new({tax_rate: 20})
     assert_equal special_cart.tax_rate, 20
   end
